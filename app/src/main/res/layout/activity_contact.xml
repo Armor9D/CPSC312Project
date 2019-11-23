@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    tools:context=".ContactActivity">
+
+    <TextView
+        android:id="@+id/displayNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="2"
+        android:text="placeholder name"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/displayPhoneNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="###-###-####" />
+
+    <Button
+        android:id="@+id/callButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call" />
+
+    <TextView
+        android:id="@+id/displayEMailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="examplename@example.com" />
+
+    <Button
+        android:id="@+id/eMailButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="eMail" />
+</GridLayout>
