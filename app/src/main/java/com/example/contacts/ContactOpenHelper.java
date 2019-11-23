@@ -63,7 +63,7 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Contact getSelectContactByIdCursor() {
+    public Contact getSelectContactByIdCursor(long id) {
         // TODO: select a single row from the datab ase and convert it into a contact
 
         return null;

@@ -45,7 +45,7 @@
         android:inputType="phone" />
 
     <TextView
-        android:id="@+id/eMail: "
+        android:id="@+id/eMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="eMail: "

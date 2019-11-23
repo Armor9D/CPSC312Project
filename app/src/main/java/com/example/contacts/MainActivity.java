@@ -32,9 +32,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         contactOpenHelper = new ContactOpenHelper(this);
+        Contact testContact = new Contact("Daniel Weaver", "408-220-3141", "dcweaver510@gmail.com");
+        contactOpenHelper.insertContact(testContact);
+        cursor = contactOpenHelper.getSelectAllContactsCursor();
 
         Button addNewContactButton = (Button) findViewById(R.id.addNewContactButton);
         ListView contactListView = (ListView) findViewById(R.id.contactListView);
+
+        // SimpleCursorAdapter to link cursor with noteListView
+        cursorAdapter = new SimpleCursorAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                cursor,
+                new String[] {ContactOpenHelper.NAME},
+                new int[] {android.R.id.text1},
+                0
+        );
+        contactListView.setAdapter(cursorAdapter);
 
         // starts EditActivity with an empty template
         addNewContactButton.setOnClickListener(new View.OnClickListener() {
@@ -60,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         getMenuInflater().inflate(R.menu.floating_context_menu, menu);
-
-
     }
 
     @Override
@@ -72,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.edit:
                 // open EditActivity with the info of the selected Contact
-                
+
                 Cursor newCursor1 = contactOpenHelper.getSelectAllContactsCursor();
                 cursorAdapter.changeCursor(newCursor1);
                 return true;
@@ -85,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     return super.onContextItemSelected(item);
         }
-
     }
 
     // handles data returned from EditActivity
