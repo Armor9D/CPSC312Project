@@ -63,10 +63,22 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Contact getSelectContactByIdCursor(long id) {
-        // TODO: select a single row from the datab ase and convert it into a contact
+    public Contact getSelectContactById(long id) {
+        String sqlSelect = "SELECT * FROM " + TABLE_CONTACTS +
+                " WHERE " + ID + "=" + id;
+        Log.d(TAG, "selectContactById: " + sqlSelect);
 
-        return null;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(sqlSelect, null);
+
+        cursor.moveToNext();
+        String name = cursor.getString(1);
+        String phoneNumber = cursor.getString(2);
+        String eMail = cursor.getString(3);
+        Contact returnContact = new Contact(name, phoneNumber, eMail);
+
+        db.close();
+        return returnContact;
     }
 
     public void updateContactById(long id, Contact contact) {
