@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         contactOpenHelper = new ContactOpenHelper(this);
-        Contact testContact = new Contact("Daniel Weaver", "408-220-3141", "dcweaver510@gmail.com");
+        final Contact testContact = new Contact("Daniel Weaver", "408-220-3141", "dcweaver510@gmail.com");
         contactOpenHelper.insertContact(testContact);
         cursor = contactOpenHelper.getSelectAllContactsCursor();
 
@@ -54,7 +54,14 @@ public class MainActivity extends AppCompatActivity {
         addNewContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
 
+                intent.putExtra("name", "");
+                intent.putExtra("phoneNumber", "");
+                intent.putExtra("emailAddress", "");
+                intent.putExtra("id", -1);
+
+                startActivityForResult(intent, NEW_CONTACT_LOGIN_REQUEST_CODE);
             }
         });
 
@@ -62,7 +69,13 @@ public class MainActivity extends AppCompatActivity {
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Contact contact = contactOpenHelper.getSelectContactById(id);
 
+                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+                intent.putExtra("sendName", contact.getName());
+                intent.putExtra("sendPhoneNumber", contact.getPhoneNumber());
+                intent.putExtra("sendEMail", contact.geteMail());
+                startActivity(intent);
             }
         });
 
@@ -84,9 +97,15 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.edit:
                 // open EditActivity with the info of the selected Contact
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
+                Contact contact = contactOpenHelper.getSelectContactById(id);
 
-                Cursor newCursor1 = contactOpenHelper.getSelectAllContactsCursor();
-                cursorAdapter.changeCursor(newCursor1);
+                intent.putExtra("name", contact.getName());
+                intent.putExtra("phoneNumber", contact.getPhoneNumber());
+                intent.putExtra("emailAddress", contact.geteMail());
+                intent.putExtra("id", id);
+
+                startActivityForResult(intent, EDIT_CONTACT_LOGIN_REQUEST_CODE);
                 return true;
             case R.id.delete:
                 contactOpenHelper.deleteContactById(id);
@@ -94,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
                 cursorAdapter.changeCursor(newCursor2);
                 return true;
 
-                default:
-                    return super.onContextItemSelected(item);
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 
