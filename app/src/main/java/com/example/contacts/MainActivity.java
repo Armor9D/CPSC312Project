@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         contactOpenHelper = new ContactOpenHelper(this);
-        final Contact testContact = new Contact("Daniel Weaver", "408-220-3141", "dcweaver510@gmail.com");
-        contactOpenHelper.insertContact(testContact);
+        //final Contact testContact = new Contact("Daniel Weaver", "408-220-3141", "dcweaver510@gmail.com");
+        //contactOpenHelper.insertContact(testContact);
         cursor = contactOpenHelper.getSelectAllContactsCursor();
 
         Button addNewContactButton = (Button) findViewById(R.id.addNewContactButton);
