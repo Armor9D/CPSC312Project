@@ -12,11 +12,12 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "contactsDatabase";
     static final int DATABASE_VERSION = 1;
 
-    static  final String TABLE_CONTACTS = "tableContacts";
+    static final String TABLE_CONTACTS = "tableContacts";
     static final String ID = "_id";
     static final String NAME = "name";
     static final String PHONE_NUMBER = "phoneNumber";
     static final String EMAIL = "eMail";
+    static final String ADDRESS = "address";
 
     public ContactOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -28,7 +29,8 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
                 "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NAME + " TEXT, " +
                 PHONE_NUMBER + " TEXT, " +
-                EMAIL + " TEXT" + ")";
+                EMAIL + " TEXT," +
+                ADDRESS + " TEXT" + ")";
         Log.d(TAG, "onCreate: " + sqlCreate);
 
 
@@ -44,7 +46,8 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         String sqlInsert = "INSERT INTO " + TABLE_CONTACTS + " VALUES(null, '" +
                 contact.getName() + "', '" +
                 contact.getPhoneNumber() + "', '" +
-                contact.geteMail() + "')";
+                contact.geteMail() + "', '" +
+                contact.getAddress() + "')";
         Log.d(TAG, "insertContact: " + sqlInsert);
 
 
@@ -75,7 +78,8 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         String name = cursor.getString(1);
         String phoneNumber = cursor.getString(2);
         String eMail = cursor.getString(3);
-        Contact returnContact = new Contact(name, phoneNumber, eMail);
+        String address = cursor.getString(4);
+        Contact returnContact = new Contact(name, phoneNumber, eMail, address);
 
         db.close();
         return returnContact;
@@ -85,7 +89,8 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         String sqlUpdate = "UPDATE " + TABLE_CONTACTS + " SET " +
                 NAME + "='" + contact.getName() + "', " +
                 PHONE_NUMBER + "='" + contact.getPhoneNumber() + "', " +
-                EMAIL + "='" + contact.geteMail() + "' WHERE " +
+                EMAIL + "='" + contact.geteMail() + "', " +
+                ADDRESS + "='" + contact.getAddress() + "' WHERE " +
                 ID + "=" + id;
         Log.d(TAG, "updateContactById: " + sqlUpdate);
 

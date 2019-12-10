@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         contactOpenHelper = new ContactOpenHelper(this);
-        //final Contact testContact = new Contact("Daniel Weaver", "408-220-3141", "dcweaver510@gmail.com");
+        //Contact testContact = new Contact("Daniel Weaver", "408-220-3141", "dcweaver510@gmail.com", "1461 Bedford Avenue, Sunnyvale CA");
         //contactOpenHelper.insertContact(testContact);
         cursor = contactOpenHelper.getSelectAllContactsCursor();
 
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("name", "");
                 intent.putExtra("phoneNumber", "");
                 intent.putExtra("emailAddress", "");
+                intent.putExtra("address", "");
                 intent.putExtra("id", -1);
 
                 startActivityForResult(intent, NEW_CONTACT_LOGIN_REQUEST_CODE);
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("sendName", contact.getName());
                 intent.putExtra("sendPhoneNumber", contact.getPhoneNumber());
                 intent.putExtra("sendEMail", contact.geteMail());
+                intent.putExtra("sendAddress", contact.getAddress());
                 startActivity(intent);
             }
         });
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("name", contact.getName());
                 intent.putExtra("phoneNumber", contact.getPhoneNumber());
                 intent.putExtra("emailAddress", contact.geteMail());
+                intent.putExtra("address", contact.getAddress());
                 intent.putExtra("id", id);
 
                 startActivityForResult(intent, EDIT_CONTACT_LOGIN_REQUEST_CODE);
@@ -128,8 +131,9 @@ public class MainActivity extends AppCompatActivity {
             String name = data.getStringExtra("returnName");
             String phoneNumber = data.getStringExtra("returnPhoneNumber");
             String eMail = data.getStringExtra("returnEMail");
+            String address = data.getStringExtra("returnAddress");
             long id = data.getLongExtra("returnId", -1);
-            Contact contact = new Contact(name, phoneNumber, eMail);
+            Contact contact = new Contact(name, phoneNumber, eMail, address);
 
             contactOpenHelper.insertContact(contact);
             Cursor newCursor = contactOpenHelper.getSelectAllContactsCursor();
@@ -139,8 +143,9 @@ public class MainActivity extends AppCompatActivity {
             String name = data.getStringExtra("returnName");
             String phoneNumber = data.getStringExtra("returnPhoneNumber");
             String eMail = data.getStringExtra("returnEMail");
+            String address = data.getStringExtra("returnAddress");
             long id = data.getLongExtra("returnId", -1);
-            Contact contact = new Contact(name, phoneNumber, eMail);
+            Contact contact = new Contact(name, phoneNumber, eMail, address);
 
             contactOpenHelper.updateContactById(id, contact);
             Cursor newCursor = contactOpenHelper.getSelectAllContactsCursor();

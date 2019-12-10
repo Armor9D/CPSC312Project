@@ -19,23 +19,30 @@ public class ContactActivity extends AppCompatActivity {
         String name = "placeholder name";
         String phoneNumber = "###-###-####";
         String eMail = "examplename@example.com";
+        String address = "placeholder address";
 
         Intent intent = getIntent();
         if (intent != null) {
             name = intent.getStringExtra("sendName");
             phoneNumber = intent.getStringExtra("sendPhoneNumber");
             eMail = intent.getStringExtra("sendEMail");
+            address = intent.getStringExtra("sendAddress");
         }
+
+        //TODO: implement address buttons functionality
 
         TextView displayNameTextView = (TextView) findViewById(R.id.displayNameTextView);
         TextView displayPhoneNumberTextView = (TextView) findViewById(R.id.displayPhoneNumberTextView);
         TextView displayEMailTextView = (TextView) findViewById(R.id.displayEMailTextView);
+        TextView displayAddressTextView = (TextView) findViewById(R.id.displayAddressTextView);
         Button callButton = (Button) findViewById(R.id.callButton);
         Button eMailButton = (Button) findViewById(R.id.eMailButton);
+        Button addressButton = (Button) findViewById(R.id.addressButton);
 
         displayNameTextView.setText(name);
         displayPhoneNumberTextView.setText(phoneNumber);
         displayEMailTextView.setText(eMail);
+        displayAddressTextView.setText(address);
 
         // uses an Intent to make a call with the phone number
         final String dial = "tel:" + phoneNumber;
@@ -59,6 +66,18 @@ public class ContactActivity extends AppCompatActivity {
                 javaMailActivityIntent.putExtra("sendEMail", sendEMail);
 
                 startActivity(javaMailActivityIntent);
+            }
+        });
+
+        // uses an Intent to find the address on Google Maps
+        final String findAddress = address;
+        addressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri mapUri = Uri.parse("geo:0,0?q=" + Uri.encode(findAddress));
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
     }

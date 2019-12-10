@@ -21,12 +21,14 @@ public class EditActivity extends AppCompatActivity {
         final EditText nameEditText = (EditText) findViewById(R.id.nameEditText);
         final EditText phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
         final EditText eMailEditText = (EditText) findViewById(R.id.eMailEditText);
+        final EditText addressEditText = (EditText) findViewById(R.id.addressEditText);
         long id = -1;
 
         if(getIntent() != null){
             nameEditText.setText(getIntent().getStringExtra("name"));
             phoneNumberEditText.setText(getIntent().getStringExtra("phoneNumber"));
             eMailEditText.setText(getIntent().getStringExtra("emailAddress"));
+            addressEditText.setText(getIntent().getStringExtra("address"));
             id = getIntent().getLongExtra("id", -1);
         }
 
@@ -44,6 +46,7 @@ public class EditActivity extends AppCompatActivity {
                     intent.putExtra("returnName", nameEditText.getText().toString());
                     intent.putExtra("returnPhoneNumber", phoneNumberEditText.getText().toString());
                     intent.putExtra("returnEMail", eMailEditText.getText().toString());
+                    intent.putExtra("returnAddress", addressEditText.getText().toString());
                     intent.putExtra("returnId", returnId);
 
                     // return data to MainActivity

@@ -7,18 +7,11 @@
     android:columnCount="2"
     tools:context=".EditActivity">
 
-    <Button
-        android:id="@+id/saveContactButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_columnSpan="2"
-        android:text="Save Contact" />
-
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name: "
+        android:text="@string/name"
         android:textSize="16sp" />
 
     <EditText
@@ -26,14 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Example Name"
+        android:hint="@string/example_name"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone number: "
+        android:text="@string/phone_number"
         android:textSize="16sp" />
 
     <EditText
@@ -41,14 +34,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="###-###-####"
+        android:hint="@string/example_phone_number"
         android:inputType="phone" />
 
     <TextView
         android:id="@+id/eMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="eMail: "
+        android:text="@string/email"
         android:textSize="16sp" />
 
     <EditText
@@ -56,7 +49,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="examplename@example.com"
+        android:hint="@string/example_email_address"
         android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/address"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/addressEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/example_address"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/saveContactButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="2"
+        android:text="@string/save_contact" />
 
 </GridLayout>

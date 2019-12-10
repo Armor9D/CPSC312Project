@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_columnSpan="2"
-        android:text="placeholder name"
+        android:text="@string/placeholder_name"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -20,23 +20,36 @@
         android:id="@+id/displayPhoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="###-###-####" />
+        android:text="@string/example_phone_number" />
 
     <Button
         android:id="@+id/callButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Call" />
+        android:text="@string/call" />
 
     <TextView
         android:id="@+id/displayEMailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="examplename@example.com" />
+        android:text="@string/example_email_address" />
 
     <Button
         android:id="@+id/eMailButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="eMail" />
+        android:text="@string/email_send" />
+
+    <TextView
+        android:id="@+id/displayAddressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/example_address" />
+
+    <Button
+        android:id="@+id/addressButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/find" />
+
 </GridLayout>

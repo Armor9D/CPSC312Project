@@ -6,17 +6,20 @@ public class Contact {
     private String name;
     private String phoneNumber;
     private String eMail;
+    private String address;
 
     public Contact() {
         name = "BLANK_NAME";
         phoneNumber = "";
         eMail = "";
+        address = "";
     }
 
-    public Contact(String name, String phoneNumber, String eMail) {
+    public Contact(String name, String phoneNumber, String eMail, String address) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.eMail = eMail;
+        this.address = address;
     }
 
     @NonNull
@@ -47,5 +50,13 @@ public class Contact {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
