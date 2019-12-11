@@ -16,6 +16,10 @@ public class ContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
+        // add back button to action bar
+        assert getSupportActionBar() != null;   // null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   // show back button
+
         String name = "placeholder name";
         String phoneNumber = "###-###-####";
         String eMail = "examplename@example.com";
@@ -28,8 +32,6 @@ public class ContactActivity extends AppCompatActivity {
             eMail = intent.getStringExtra("sendEMail");
             address = intent.getStringExtra("sendAddress");
         }
-
-        //TODO: implement address buttons functionality
 
         TextView displayNameTextView = (TextView) findViewById(R.id.displayNameTextView);
         TextView displayPhoneNumberTextView = (TextView) findViewById(R.id.displayPhoneNumberTextView);
@@ -80,5 +82,12 @@ public class ContactActivity extends AppCompatActivity {
                 startActivity(mapIntent);
             }
         });
+    }
+
+    // back button returns user to previous activity
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

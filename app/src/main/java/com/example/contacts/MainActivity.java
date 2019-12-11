@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -94,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        long id = info.id; // this should be the id of the selected Contact from contactListView
+        final long id = info.id; // this should be the id of the selected Contact from contactListView
+        Contact contact = contactOpenHelper.getSelectContactById(id);
 
         switch (item.getItemId()) {
             case R.id.edit:
                 // open EditActivity with the info of the selected Contact
                 Intent intent = new Intent(MainActivity.this, EditActivity.class);
-                Contact contact = contactOpenHelper.getSelectContactById(id);
 
                 intent.putExtra("name", contact.getName());
                 intent.putExtra("phoneNumber", contact.getPhoneNumber());
@@ -111,9 +113,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, EDIT_CONTACT_LOGIN_REQUEST_CODE);
                 return true;
             case R.id.delete:
-                contactOpenHelper.deleteContactById(id);
-                Cursor newCursor2 = contactOpenHelper.getSelectAllContactsCursor();
-                cursorAdapter.changeCursor(newCursor2);
+                // confirm deletion with AlertDialog
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+                alertBuilder.setTitle("Delete this contact?")
+                        .setMessage("Are you sure you want to delete '" + contact.getName() + "' from your list of contacts?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // delete contact
+                                contactOpenHelper.deleteContactById(id);
+                                Cursor newCursor2 = contactOpenHelper.getSelectAllContactsCursor();
+                                cursorAdapter.changeCursor(newCursor2);
+                            }
+                        })
+                        .setNegativeButton("No", null);
+                alertBuilder.show();
                 return true;
 
             default:

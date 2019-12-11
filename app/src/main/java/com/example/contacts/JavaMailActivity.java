@@ -17,6 +17,10 @@ public class JavaMailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_java_mail);
 
+        // add back button to action bar
+        assert getSupportActionBar() != null;   // null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   // show back button
+
         String eMail = "";
         Intent intent = getIntent();
         if (intent != null) {
@@ -46,5 +50,12 @@ public class JavaMailActivity extends AppCompatActivity {
                 javaMailAPI.execute();
             }
         });
+    }
+
+    // back button returns user to previous activity
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

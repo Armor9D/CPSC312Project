@@ -17,6 +17,10 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        // add back button to action bar
+        assert getSupportActionBar() != null;   // null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   // show back button
+
         Button saveContactButton = (Button) findViewById(R.id.saveContactButton);
         final EditText nameEditText = (EditText) findViewById(R.id.nameEditText);
         final EditText phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
@@ -37,8 +41,8 @@ public class EditActivity extends AppCompatActivity {
         saveContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(nameEditText.getText().toString().equals("") || phoneNumberEditText.getText().toString().equals("") || eMailEditText.getText().toString().equals("")){
-                    Toast.makeText(EditActivity.this, "Do not leave any empty fields!", Toast.LENGTH_SHORT).show();
+                if(nameEditText.getText().toString().equals("") || phoneNumberEditText.getText().toString().equals("") || eMailEditText.getText().toString().equals("") || addressEditText.getText().toString().equals("")){
+                    Toast.makeText(EditActivity.this, "Please fill all fields.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Intent intent = new Intent();
@@ -55,5 +59,12 @@ public class EditActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // back button returns user to previous activity
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

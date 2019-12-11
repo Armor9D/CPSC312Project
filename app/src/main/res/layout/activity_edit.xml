@@ -72,6 +72,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_columnSpan="2"
-        android:text="@string/save_contact" />
+        android:text="@string/save_contact"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        />
 
 </GridLayout>
