@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -40,14 +41,19 @@ public class JavaMailActivity extends AppCompatActivity {
         sendFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.EMAIL = mailEditText.getText().toString().trim();
-                Utils.PASSWORD = passwordEditText.getText().toString();
-                String subject = subjectEditText.getText().toString().trim();
-                String message = messageEditText.getText().toString();
+                if (mailEditText.getText().toString().trim().equals("") || passwordEditText.getText().toString().equals("")) {
+                    Toast.makeText(JavaMailActivity.this, "Please enter your username and password.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Utils.EMAIL = mailEditText.getText().toString().trim();
+                    Utils.PASSWORD = passwordEditText.getText().toString();
+                    String subject = subjectEditText.getText().toString().trim();
+                    String message = messageEditText.getText().toString();
 
-                // send email
-                JavaMailAPI javaMailAPI = new JavaMailAPI(JavaMailActivity.this, gmailAddress, subject, message);
-                javaMailAPI.execute();
+                    // send email
+                    JavaMailAPI javaMailAPI = new JavaMailAPI(JavaMailActivity.this, gmailAddress, subject, message);
+                    javaMailAPI.execute();
+                }
             }
         });
     }

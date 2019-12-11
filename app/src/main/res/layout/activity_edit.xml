@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:columnCount="2"
     tools:context=".EditActivity">
 
@@ -11,6 +12,7 @@
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:text="@string/name"
         android:textSize="16sp" />
 
@@ -20,12 +22,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/example_name"
+        android:textSize="16sp"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:text="@string/phone_number"
         android:textSize="16sp" />
 
@@ -35,12 +39,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/example_phone_number"
+        android:textSize="16sp"
         android:inputType="phone" />
 
     <TextView
         android:id="@+id/eMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:text="@string/email"
         android:textSize="16sp" />
 
@@ -50,6 +56,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/example_email_address"
+        android:textSize="16sp"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -65,6 +72,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/example_address"
+        android:textSize="16sp"
         android:inputType="textEmailAddress" />
 
     <Button
@@ -73,6 +81,8 @@
         android:layout_height="wrap_content"
         android:layout_columnSpan="2"
         android:text="@string/save_contact"
+        android:layout_gravity="bottom"
+        android:textSize="16sp"
         style="@style/Widget.AppCompat.Button.Borderless"
         />
 

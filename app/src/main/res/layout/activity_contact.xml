@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:columnCount="2"
+    android:padding="16dp"
     tools:context=".ContactActivity">
 
     <TextView
@@ -14,45 +15,54 @@
         android:layout_columnSpan="2"
         android:text="@string/placeholder_name"
         android:textAlignment="center"
+        android:paddingBottom="16dp"
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/displayPhoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/example_phone_number" />
+        android:text="@string/example_phone_number"
+        android:textSize="16sp"
+        android:paddingBottom="16dp"/>
 
     <Button
         android:id="@+id/callButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/call" />
+        android:layout_gravity="end"
+        android:text="@string/call"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <TextView
         android:id="@+id/displayEMailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/example_email_address" />
+        android:text="@string/example_email_address"
+        android:textSize="16sp"
+        android:paddingBottom="16dp" />
 
     <Button
         android:id="@+id/eMailButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/email_send" />
+        android:layout_gravity="end"
+        android:text="@string/email_send"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <TextView
         android:id="@+id/displayAddressTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/example_address" />
+        android:text="@string/example_address"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/addressButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/find" />
+        android:layout_gravity="end"
+        android:text="@string/find"
+        style="@style/Widget.AppCompat.Button.Borderless" />
 
 </GridLayout>
