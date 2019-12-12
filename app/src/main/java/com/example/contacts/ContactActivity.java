@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Handles the interaction with an established Contact and allows the user to use the calling, email, and location functions regarding that contact
+ */
+
 public class ContactActivity extends AppCompatActivity {
 
     @Override

@@ -6,6 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * Setes up the SQLite table that stores the Contact list, allowing for persistent storage between app uses
+ */
+
 public class ContactOpenHelper extends SQLiteOpenHelper {
     static final String TAG = "ContactOpenHelperTag";
 
@@ -19,6 +23,11 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
     static final String EMAIL = "eMail";
     static final String ADDRESS = "address";
 
+    /**
+     * DVC for the ContactOpenHelper class
+     *
+     * @param context - context in which the ContactOpenHelper is being run in
+     */
     public ContactOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -42,6 +51,11 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Inserts a contact into the SQLite table
+     *
+     * @param contact - contact to insert into table
+     */
     public void insertContact(Contact contact) {
         String sqlInsert = "INSERT INTO " + TABLE_CONTACTS + " VALUES(null, '" +
                 contact.getName() + "', '" +
@@ -56,6 +70,11 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Gets the cursor which selects a contact from the SQLite table
+     *
+     * @return cursor used by the database
+     */
     public Cursor getSelectAllContactsCursor() {
         String sqlSelect = "SELECT * FROM " + TABLE_CONTACTS;
         Log.d(TAG, "getSelectAllContactCursor: " + sqlSelect);
@@ -66,6 +85,12 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    /**
+     * Gets the contact from the table corresponding to the id
+     *
+     * @param id - id used to identify a Contact in the SQL table
+     * @return Contact corresponding to the sent id
+     */
     public Contact getSelectContactById(long id) {
         String sqlSelect = "SELECT * FROM " + TABLE_CONTACTS +
                 " WHERE " + ID + "=" + id;
@@ -85,6 +110,12 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         return returnContact;
     }
 
+    /**
+     * Updates the Contact within the SQLite table, when the Contact is edited
+     *
+     * @param id - id number used to identify the Contact to be updated
+     * @param contact - new Contact information to replace the older information
+     */
     public void updateContactById(long id, Contact contact) {
         String sqlUpdate = "UPDATE " + TABLE_CONTACTS + " SET " +
                 NAME + "='" + contact.getName() + "', " +
@@ -100,6 +131,9 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Deletes all contacts from the SQLite table
+     */
     public void deleteAllContacts() {
         String sqlDelete = "DELETE FROM " + TABLE_CONTACTS;
         Log.d(TAG, "deleteAllContacts: " + sqlDelete);
@@ -110,6 +144,11 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Deletes a specific contact from the SQLite table based on an identifier
+     *
+     * @param id - identifier for which contact to delete from the table
+     */
     public void deleteContactById(long id) {
         String sqlDelete = "DELETE FROM " + TABLE_CONTACTS + " WHERE " +
                 ID + "=" + id;
@@ -121,3 +160,4 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 }
+

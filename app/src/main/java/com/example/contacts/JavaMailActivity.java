@@ -11,6 +11,10 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+/**
+ * This activity allows the user to write and send emails to a contact's email addrees from the GMail address of their cjoice
+ */
+
 public class JavaMailActivity extends AppCompatActivity {
 
     @Override

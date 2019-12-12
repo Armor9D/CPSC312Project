@@ -13,16 +13,15 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * Sets up the Java mail API, which allows for an email to be sent using a user's personal GMail account
+ * Sources: https://www.youtube.com/watch?v=RahBCY5BfS0 - Youtube tutorial on using JavaMail in Android Studio
+ *          https://github.com/Musfick/JavaMailAPIDemo - Github repository for Youtube Tutorial
+ *          https://www.tutorialspoint.com/javamail_api/javamail_api_tutorial.pdf - Guide to using JavaMail for regular Java
+ */
+
 public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
 
-    //Add those line in dependencies
-    //implementation files('libs/activation.jar')
-    //implementation files('libs/additionnal.jar')
-    //implementation files('libs/mail.jar')
-
-    //Need INTERNET permission
-
-    //Variables
     private Context mContext;
     private Session mSession;
 
@@ -32,7 +31,14 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
 
     private ProgressDialog mProgressDialog;
 
-    //Constructor
+    /**
+     * EVC for the JavaMailAPI class
+     *
+     * @param mContext - the Activity calling this class
+     * @param mEmail - the email address to which the email is being sent
+     * @param mSubject - the header line of the email
+     * @param mMessage - the main body of the email
+     */
     public JavaMailAPI(Context mContext, String mEmail, String mSubject, String mMessage) {
         this.mContext = mContext;
         this.mEmail = mEmail;
@@ -40,37 +46,50 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
         this.mMessage = mMessage;
     }
 
+    /**
+     * Activates before the background UI thread sends the email
+     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //Show progress dialog while sending email
+        // Shows a progress bar while the  email is being sent
         mProgressDialog = ProgressDialog.show(mContext,"Sending message", "Please wait...",false,false);
     }
 
+    /**
+     * Activates after the background UI thread finishes sending the email
+     *
+     * @param aVoid
+     */
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        //Dismiss progress dialog when message successfully send
+        // Removes the progress bar
         mProgressDialog.dismiss();
 
-        //Show success toast
+        // Notifies user that email has been sent
         Toast.makeText(mContext,"Message Sent",Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Background thread that actually sends email
+     *
+     * @param params
+     */
     @Override
     protected Void doInBackground(Void... params) {
-        //Creating properties
+        // Create properties to allow sending of email
         Properties props = new Properties();
 
-        //Configuring properties for gmail
-        //If you are not using gmail you may need to change the values
+        // Configure properties to send from a GMail address
+        // This will not work if sending from a non-GMail address
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
 
-        //Creating a new session
+        // Create a new session and authenticate user's email address and password
         mSession = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     //Authenticating the password
@@ -80,42 +99,22 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
                 });
 
         try {
-            //Creating MimeMessage object
+            // Create MimeMessage object
             MimeMessage mm = new MimeMessage(mSession);
 
-            //Setting sender address
+            // Set address of email's sender
             mm.setFrom(new InternetAddress(Utils.EMAIL));
-            //Adding receiver
+            // Set address of email's recipient
             mm.addRecipient(Message.RecipientType.TO, new InternetAddress(mEmail));
-            //Adding subject
+            // Add email's subject line
             mm.setSubject(mSubject);
-            //Adding message
+            // Add actual message of email
             mm.setText(mMessage);
-            //Sending email
+            // Send the email
             Transport.send(mm);
 
-//            BodyPart messageBodyPart = new MimeBodyPart();
-//
-//            messageBodyPart.setText(message);
-//
-//            Multipart multipart = new MimeMultipart();
-//
-//            multipart.addBodyPart(messageBodyPart);
-//
-//            messageBodyPart = new MimeBodyPart();
-//
-//            DataSource source = new FileDataSource(filePath);
-//
-//            messageBodyPart.setDataHandler(new DataHandler(source));
-//
-//            messageBodyPart.setFileName(filePath);
-//
-//            multipart.addBodyPart(messageBodyPart);
-
-//            mm.setContent(multipart);
-
         } catch (MessagingException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // in case of errors with message process
         }
         return null;
     }

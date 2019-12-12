@@ -1,10 +1,14 @@
 package com.example.contacts;
 
+/**
+ * Stores the user's username and password
+ */
+
 public class Utils {
 
-    //This is your from email
+    // User's email
     public static  String EMAIL = "contactslistproject@gmail.com";
 
-    //This is your from email password
+    // User's password
     public static String PASSWORD = "CPSC312project";
 }

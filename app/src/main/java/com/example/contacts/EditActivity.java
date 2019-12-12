@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Allows the user to create or edit a Contact, and saves the edit or new csontact to the main Contact list
+ */
+
 public class EditActivity extends AppCompatActivity {
 
     @Override
